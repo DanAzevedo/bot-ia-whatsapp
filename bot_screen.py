@@ -1,14 +1,17 @@
 from selenium import webdriver
+import time
+import os
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import requests
 import openai
-import time
-import os
+import logging
 import PySimpleGUI as sg
 
-##########################################API DO EDITACODIGO##########################################
+logger = logging.getLogger(__name__)
+
+# #########################################API DO EDITACODIGO##########################################
 agent = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                        'Chrome/59.0.3071.115 Safari/537.36'}
 
@@ -25,14 +28,14 @@ caixa_msg = api[5].strip()
 msg_cliente = api[6].strip()
 
 
-######################################################################################################
+# #####################################################################################################
 
-##########################################BOT#########################################################
+# #########################################BOT#########################################################
 def bot():
     try:
         # 1 - PEGAR A MENSAGEM E CLICAR NELA
         # Para buscar uma notificação
-        notif_tag = driver.find_element(By.CLASS_NAME, bolinha_notificacao)
+        # notif_tag = driver.find_element(By.CLASS_NAME, bolinha_notificacao)
         # Para buscar várias notificações
         notif_tag = driver.find_elements(By.CLASS_NAME, bolinha_notificacao)
         # Buscar a mais recente indicando -1 no índice
@@ -62,7 +65,7 @@ def bot():
         question = client + msg + text2 + texto
 
         # 3 - PROCESSA A MENSAGEM NA API IA
-        ##########################################API DO OPENAI##########################################
+        # #########################################API DO OPENAI##########################################
         openai.api_key = apiopenai.strip()
         response = openai.Completion.create(
             model="text-davinci-003",
@@ -76,7 +79,7 @@ def bot():
         ret = response['choices'][0]['text']
         print(ret)
         time.sleep(3)
-        ################################################################################################
+        # ###############################################################################################
 
         # 4 - RESPONDE A MENSAGEM
         # Seleciona a caixa de mensagem e clica
@@ -89,29 +92,36 @@ def bot():
         # 5 - FECHA O CONTATO
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
     except:
-        print('Buscando novas notificações...')
+        logger.error(print('Buscando novas notificações...'))
         time.sleep(3)
+        raise
 
 
-######################################################################################################
+# #####################################################################################################
 
-#####################TELAS#####################
+# ####################TELAS#####################
+img = sg.Image(filename='ia.png', key='-IMAGE-')
+img2 = sg.Image(filename='ia.png', key='_CAMIMAGE_')
+
 screen1 = [
+    [sg.Column([[img]], justification='center')],
     [sg.Text('PASS')],
-    [sg.Input(key='pass', password_char='*')],
+    [sg.Input(key='pass')],
     [sg.Button('LOGIN')],
+    [sg.Text('', key='error')]
 ]
 
 screen2 = [
+    [sg.Column([[img2]], justification='center')],
     [sg.Text('BEM VINDO AO BOT DE INTELIGÊNCIA ARTIFICIAL')],
-    [sg.Text('Insira a API da OpenAI')],
+    [sg.Text('Insira sua key da OpenAI')],
     [sg.Input(key='apiopenai')],
     [sg.Multiline(size=(80, 20), key='texto')],
     [sg.Text('TENHA O CELULAR EM MÃOS')],
     [sg.Text('CLIQUE ABAIXO PARA CAPTURAR O QR CODE')],
-    [sg.Button('QR CODE')],
+    [sg.Button('CAPTURAR QRCODE')],
 ]
-############################################
+# ###########################################
 
 windows1 = sg.Window('IA BOT', layout=screen1)
 windows2 = sg.Window('IA BOT', layout=screen2)
@@ -122,20 +132,23 @@ while True:
         break
     if event == 'LOGIN':
         password = values['pass']
-        if password == token1:
+        if password == token1 or password == token2 or password == token3:
             windows1.close()
             event2, values2 = windows2.read()
-            if event2 == 'CAPTURAR QR CODE':
+            if event2 == 'CAPTURAR QRCODE':
                 apiopenai = values2['apiopenai']
                 texto = values2['texto']
                 windows2.close()
                 dir_path = os.getcwd()
                 chrome_options2 = Options()
-                chrome_options2.add_argument(r'user-data-dir=' + dir_path + "profile/zap")
+                chrome_options2.add_argument(r"user-data-dir=" + dir_path + "profile/zap")
                 driver = webdriver.Chrome(options=chrome_options2)
                 driver.get('https://web.whatsapp.com/')
-                time.sleep(15)
+                time.sleep(10)
                 while True:
                     bot()
+
+            if event2 == sg.WIN_CLOSED:
+                break
         else:
-            print('Senha incorreta!')
+            screen1["error"].update('Senha incorreta!')

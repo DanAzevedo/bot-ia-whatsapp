@@ -28,7 +28,6 @@ contato_cliente = api[4].strip()
 caixa_msg = api[5].strip()
 msg_cliente = api[6].strip()
 ######################################################################################################
-
 time.sleep(15)
 
 
@@ -59,19 +58,13 @@ def bot():
         msg = all_msg_txt[-1]
         print(msg)
 
-        client = 'mensagem do cliente:'
-        text2 = 'Responda a mensagem do cliente com base no proximo texto'
-        text = 'explique que você é uma inteligência artificial e a ausência com o motivo de que Daniel está ' \
-               'programando ou estudando e pça que deixa uma mensagem adiantando o assunto e se tem alguma urgência.'
-        question = client + msg + text2 + text
-
         # 3 - PROCESSA A MENSAGEM NA API IA
         ##########################################API DO OPENAI##########################################
         openai.api_key = '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'
 
         response = openai.Completion.create(
             model="text-davinci-003",
-            prompt=question,
+            prompt=msg,
             temperature=0.7,
             max_tokens=256,
             top_p=1,
