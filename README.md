@@ -41,12 +41,15 @@
 
 - No caso da opção da utilização de interface gráfica utilizando a PySimpleGUI, você pode escolher até três Tokens no site do [Edita Código](https://editacodigo.com.br/index/index.php), como senha para acesso ao seu bot.
 * Substitua o trecho "apiopenai.strip()" por sua API Key
+
 ![Screenshot_2](https://user-images.githubusercontent.com/60473748/217602981-92f3026e-b97c-4c55-8442-0b40dce576c8.png)
 
 * Ou, forneça sua API Key após efetuar login com seu Token gerado e salvo no [Edita Código](https://editacodigo.com.br/index/index.php)
+
 ![Screenshot_3](https://user-images.githubusercontent.com/60473748/217604171-ffaf57ff-70bb-442d-8a84-e32d5802df09.png)
 
 - A API do ChatGPT responde ao usuário utilizando-se de inteligência artifical podendo ser personalizao o tipo de resposta. Você pode fornecer sua API key tanto no código como na interface gerada pelo PySimpleGUI (Caso opte por utilizar sem interface gráfica, apenas insira sua API Key no lugar correto e já está pronto para rodar)
+
 ![openai](https://user-images.githubusercontent.com/60473748/217603389-a72d5290-ec76-4e68-96a0-6be33286bfa1.png)
 
 - Na caixa de texto em branco, você pode inserir informações para a IA se basear ao responder o contato.
