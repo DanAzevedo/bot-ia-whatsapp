@@ -26,9 +26,9 @@
 - [Selenium](https://www.selenium.dev/)
 - [OpeanAI](https://platform.openai.com/docs/libraries)
 - [PySimpleGUI](https://www.pysimplegui.org/en/latest/)
-- [Others] requests, time, os
 - [OpenAI API](https://openai.com/api/)
 - [Edita Código API](https://editacodigo.com.br/index/index.php)
+- [Others] requests, time, os
 
 > <h3>About</h3>
 - Faz-se uso da API do Edita Código para atualizar sempre que houver mudanças, as classes e/ou os Xpaths do WhatsApp. É necessário fazer uso do token fornecido pelo [Edita Código](https://editacodigo.com.br/index/index.php).
@@ -36,6 +36,7 @@
 ![api edita código](https://user-images.githubusercontent.com/60473748/217601436-d0b9ca7b-31e1-45b8-a5d4-ffd9f1c62462.png)
 
 * Tela de login do bot/Login screen
+
 ![pass](https://user-images.githubusercontent.com/60473748/217604253-271a3864-45f3-4a7c-bcef-1399502716db.png)
 
 - No caso da opção da utilização de interface gráfica utilizando a PySimpleGUI, você pode escolher até três Tokens no site do [Edita Código](https://editacodigo.com.br/index/index.php), como senha para acesso ao seu bot.
@@ -57,7 +58,7 @@ Ex.: "Explique que você é uma inteligência artificial e a ausência com o mot
 
 - Dúvidas: n6_daniel@yahoo.com.br
 
-===================================================================================================================================================================
+==========================================================================================================
 
 - The Edita Code API is used to update WhatsApp classes and/or Xpaths whenever there are changes. It is necessary to make use of the token provided by [Edita Código](https://editacodigo.com.br/index/index.php).
 - Replace -YOUR-API-KEY- with your free generated token.
