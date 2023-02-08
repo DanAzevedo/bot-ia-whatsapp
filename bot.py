@@ -60,7 +60,7 @@ def bot():
 
         # 3 - PROCESSA A MENSAGEM NA API IA
         ##########################################API DO OPENAI##########################################
-        openai.api_key = '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'
+        openai.api_key = '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'
 
         response = openai.Completion.create(
             model="text-davinci-003",
