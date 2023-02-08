@@ -6,15 +6,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import requests
 import openai
-import logging
 import PySimpleGUI as sg
-
-logger = logging.getLogger(__name__)
 
 # #########################################API DO EDITACODIGO##########################################
 agent = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                        'Chrome/59.0.3071.115 Safari/537.36'}
-
 api = requests.get("https://editacodigo.com.br/index/api-whatsapp/z1A1JRIvFqrKQN0YeLSca8kdDWIPhFV4", headers=agent)
 time.sleep(1)
 api = api.text
@@ -49,6 +45,11 @@ def bot():
         action_notif.perform()
         action_notif.click()
         action_notif.perform()
+
+        # Pega o contato do cliente
+        client_phone = driver.find_element_by_xpath('//*[@id="main"]/header/div[2]/div[1]/div/span')
+        final_phone = client_phone.text
+        print(final_phone)
 
         # 2 - LER A NOVA MENSAGEM
         all_msg = driver.find_elements(By.CLASS_NAME, msg_cliente)
@@ -92,9 +93,8 @@ def bot():
         # 5 - FECHA O CONTATO
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
     except:
-        logger.error(print('Buscando novas notificações...'))
+        print('Buscando novas notificações...')
         time.sleep(3)
-        raise
 
 
 # #####################################################################################################
