@@ -20,7 +20,7 @@
 - `Funcionalidades`: Marketing, poupar tempo.
 - `Functionalities`: Marketing, save time.
  
-> <h3>✔️Tecnologias utilizadas/Technologies used</h3>
+> <h3>✔️Tecnologias utilizadas/Technologies</h3>
 
 - [Python 3.9](https://www.python.org/)
 - [Selenium](https://www.selenium.dev/)
