@@ -8,10 +8,10 @@ import requests
 import openai
 import PySimpleGUI as sg
 
-# #########################################API DO EDITACODIGO##########################################
+# ########################################-API DO EDITACODIGO-#########################################
 agent = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                        'Chrome/59.0.3071.115 Safari/537.36'}
-api = requests.get("https://editacodigo.com.br/index/api-whatsapp/z1A1JRIvFqrKQN0YeLSca8kdDWIPhFV4", headers=agent)
+api = requests.get("https://editacodigo.com.br/index/api-whatsapp/apitoken", headers=agent)
 time.sleep(1)
 api = api.text
 api = api.split(".n.")
@@ -26,7 +26,7 @@ msg_cliente = api[6].strip()
 
 # #####################################################################################################
 
-# #########################################BOT#########################################################
+# ########################################-BOT-########################################################
 def bot():
     try:
         # 1 - PEGAR A MENSAGEM E CLICAR NELA
@@ -45,7 +45,6 @@ def bot():
         action_notif.perform()
         action_notif.click()
         action_notif.perform()
-
         # Pega o contato do cliente
         client_phone = driver.find_element_by_xpath('//*[@id="main"]/header/div[2]/div[1]/div/span')
         final_phone = client_phone.text
@@ -66,7 +65,7 @@ def bot():
         question = client + msg + text2 + texto
 
         # 3 - PROCESSA A MENSAGEM NA API IA
-        # #########################################API DO OPENAI##########################################
+        # ########################################-API DO OPENAI-#########################################
         openai.api_key = apiopenai.strip()
         response = openai.Completion.create(
             model="text-davinci-003",
@@ -99,7 +98,7 @@ def bot():
 
 # #####################################################################################################
 
-# ####################TELAS#####################
+# ###################-TELAS-####################
 img = sg.Image(filename='ia.png', key='-IMAGE-')
 img2 = sg.Image(filename='ia.png', key='_CAMIMAGE_')
 

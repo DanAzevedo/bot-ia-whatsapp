@@ -14,12 +14,12 @@ chrome_options2.add_argument(r'user-data-dir=' + dir_path + "profile/zap")
 driver = webdriver.Chrome(options=chrome_options2)
 driver.get('https://web.whatsapp.com/')
 
-##########################################API DO EDITACODIGO##########################################
+# #########################################API DO EDITACODIGO##########################################
 # Caso o WhatsApp mude o nome da classe, essa API ajuda atualizando sozinho o nome da classe
 agent = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                        'Chrome/59.0.3071.115 Safari/537.36'}
 
-api = requests.get("https://editacodigo.com.br/index/api-whatsapp/z1A1JRIvFqrKQN0YeLSca8kdDWIPhFV4", headers=agent)
+api = requests.get("https://editacodigo.com.br/index/api-whatsapp/apitoken", headers=agent)
 time.sleep(1)
 api = api.text
 api = api.split(".n.")
@@ -27,7 +27,7 @@ bolinha_notificacao = api[3].strip()
 contato_cliente = api[4].strip()
 caixa_msg = api[5].strip()
 msg_cliente = api[6].strip()
-######################################################################################################
+# #####################################################################################################
 time.sleep(15)
 
 
@@ -49,6 +49,10 @@ def bot():
         action_notif.perform()
         action_notif.click()
         action_notif.perform()
+        # Pega o contato do cliente
+        client_phone = driver.find_element_by_xpath('//*[@id="main"]/header/div[2]/div[1]/div/span')
+        final_phone = client_phone.text
+        print(final_phone)
 
         # 2 - LER A NOVA MENSAGEM
         all_msg = driver.find_elements(By.CLASS_NAME, msg_cliente)
@@ -59,8 +63,8 @@ def bot():
         print(msg)
 
         # 3 - PROCESSA A MENSAGEM NA API IA
-        ##########################################API DO OPENAI##########################################
-        openai.api_key = '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'
+        # #########################################API DO OPENAI##########################################
+        openai.api_key = 'apikey'
 
         response = openai.Completion.create(
             model="text-davinci-003",
@@ -74,7 +78,7 @@ def bot():
         ret = response['choices'][0]['text']
         print(ret)
         time.sleep(3)
-        ################################################################################################
+        # ###############################################################################################
 
         # 4 - RESPONDE A MENSAGEM
         # Seleciona a caixa de mensagem e clica
