@@ -61,7 +61,7 @@ Ex.: "Explique que você é uma inteligência artificial e a ausência com o mot
 
 - Dúvidas: n6_daniel@yahoo.com.br
 
-==========================================================================================================
+============================================================================================
 
 - The Edita Code API is used to update WhatsApp classes and/or Xpaths whenever there are changes. It is necessary to make use of the token provided by [Edita Código](https://editacodigo.com.br/index/index.php).
 - Replace -YOUR-API-KEY- with your free generated token.
